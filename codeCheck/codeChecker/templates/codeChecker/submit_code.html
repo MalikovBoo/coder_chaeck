@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Code</title>
+</head>
+<body>
+    <h1>Submit your code</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if comparison_results %}
+        <h2>Comparison Results</h2>
+        <ul>
+            {% for other_student, similarity in comparison_results %}
+                <li>{{ other_student }}: {{ similarity }}%</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: center;
+        }
+        th, td {
+            min-width: 70px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comparison Results</h1>
+    <!-- Форма для выбора урока -->
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Show Results</button>
+    </form>
+
+    {% if submissions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Student \ Student</th>
+                    {% for student in students %}
+                        <th>{{ student.full_name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for student, comparisons in results_matrix.items %}
+                    <tr>
+                        <td><strong>{{ student }}</strong></td>
+                        {% for other_student, similarity in comparisons.items %}
+                            <td>{{ similarity }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Please select a lesson to view the comparison results.</p>
+    {% endif %}
+</body>
+</html>
